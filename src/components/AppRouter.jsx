@@ -7,6 +7,8 @@ import RequireAuth from '../hoc/RequireAuth';
 import { AuthProvider } from '../hoc/AuthProvider';
 import NotFoundPage from '../pages/NotFoundPage';
 import HomePage from '../pages/Home';
+import DayProduct from '../pages/DayProduct';
+import AdminPage from '../pages/Admin';
 
 const AppRouter = () => {
   return (
@@ -21,6 +23,8 @@ const AppRouter = () => {
           }
         >
           <Route index element={<HomePage />} />
+          <Route path='day-product' element={<DayProduct />} />
+          <Route path='admin' element={<AdminPage />} />
         </Route>
         <Route path='login' element={<Login />} />
         <Route path='*' element={<NotFoundPage />} />

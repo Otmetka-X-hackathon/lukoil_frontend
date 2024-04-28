@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hook/useAuth';
 import AuthService from '../services/AuthService';
 
@@ -14,19 +14,25 @@ const Login = () => {
     event.preventDefault();
     const form = event.target;
     const phone = form.phone.value;
+    const code = form.code.value;
 
-    const data = AuthService.login(phone);
+    const { data } = await AuthService.login(phone, code);
 
-    console.log(data);
-
-    signIn(data, () => navigate(fromPage, { replace: true }));
+    signIn(data.object, () => navigate(fromPage, { replace: true }));
   };
+
+  if (localStorage.getItem('token')) {
+    return <Navigate to='/' state={{ from: location }} />;
+  }
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <label>
           Телефон: <input name='phone' />
+        </label>
+        <label>
+          Код: <input name='code' />
         </label>
         <button type='submit'>Войти</button>
       </form>

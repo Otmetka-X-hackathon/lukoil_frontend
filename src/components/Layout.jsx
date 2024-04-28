@@ -1,10 +1,12 @@
 import { Outlet } from 'react-router-dom';
+import BottomMenu from './BottomMenu';
 
 const Layout = () => {
   return (
-    <div>
+    <>
       <Outlet />
-    </div>
+      <BottomMenu />
+    </>
   );
 };
 
